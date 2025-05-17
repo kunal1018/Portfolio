@@ -189,12 +189,12 @@ const AboutSection: React.FC = () => {
                 transition={{ delay: 0.4 }}
               >
                 <a 
-                  href="/kunal_resume_may2025.pdf"
+                  href="/resume.pdf"
                   download
                   className="inline-flex items-center gap-2 bg-white text-black px-8 py-3 rounded-lg hover:bg-gray-200 transition-colors hover:scale-105 transform duration-200 shadow-md"
                 >
                   <ExternalLink size={20} />
-                  Download Resume (May 2025)
+                  Download Resume
                 </a>
               </motion.div>
             </div>

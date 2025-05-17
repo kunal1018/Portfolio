@@ -99,12 +99,12 @@ const Contact: React.FC = () => {
             </p>
             <div className="flex gap-4">
               <a 
-                href="/kunal_resume_may2025.pdf"
+                href="/resume.pdf"
                 download
                 className="flex items-center gap-2 bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-all duration-300 hover:scale-105 transform shadow-lg shadow-primary-600/20"
               >
                 <ExternalLink size={16} />
-                Download Resume (May 2025)
+                Download Resume
               </a>
               <a 
                 href="https://www.linkedin.com/in/kunal-gandhi-9349852a0/"
@@ -251,7 +251,7 @@ const Contact: React.FC = () => {
                   <Github className="text-white" size={24} />
                 </motion.a>
                 <motion.a
-                  href="/kunal_resume_may2025.pdf"
+                  href="/resume.pdf"
                   download
                   className="w-12 h-12 bg-gradient-to-br from-primary-600 to-primary-500 rounded-xl flex items-center justify-center shadow-lg shadow-primary-600/20 hover:scale-110 transition-transform"
                   whileHover={{ y: -5 }}
