@@ -100,8 +100,8 @@ const Contact: React.FC = () => {
             <div className="flex gap-4">
               <a 
                 href="/resume.pdf"
-                download
                 className="flex items-center gap-2 bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-all duration-300 hover:scale-105 transform shadow-lg shadow-primary-600/20"
+                download
               >
                 <ExternalLink size={16} />
                 Download Resume
@@ -252,9 +252,9 @@ const Contact: React.FC = () => {
                 </motion.a>
                 <motion.a
                   href="/resume.pdf"
-                  download
                   className="w-12 h-12 bg-gradient-to-br from-primary-600 to-primary-500 rounded-xl flex items-center justify-center shadow-lg shadow-primary-600/20 hover:scale-110 transition-transform"
                   whileHover={{ y: -5 }}
+                  download
                 >
                   <ExternalLink className="text-white" size={24} />
                 </motion.a>

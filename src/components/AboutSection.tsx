@@ -190,8 +190,8 @@ const AboutSection: React.FC = () => {
               >
                 <a 
                   href="/resume.pdf"
-                  download
                   className="inline-flex items-center gap-2 bg-white text-black px-8 py-3 rounded-lg hover:bg-gray-200 transition-colors hover:scale-105 transform duration-200 shadow-md"
+                  download
                 >
                   <ExternalLink size={20} />
                   Download Resume
