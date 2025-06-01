@@ -65,6 +65,51 @@ const ExperienceSection: React.FC = () => {
     // Extracurricular Activities
     {
       id: 4,
+      title: "Development Volunteer",
+      company: "Hack the 6ix",
+      location: "Toronto, ON",
+      period: "August 2024",
+      category: "extracurricular",
+      description: [
+        "Played an active role in supporting event logistics and participant coordination at Toronto's premier hackathon.",
+        "Assisted with registration, technical troubleshooting, and on-site support for over 100 participants.",
+        "Collaborated with teams to ensure smooth operations and an engaging experience for attendees."
+      ],
+      skills: ["Event Management", "Technical Support", "Team Collaboration", "Problem Solving"],
+      link: "https://hackthe6ix.com"
+    },
+    {
+      id: 5,
+      title: "Community Development Volunteer",
+      company: "Downtown Hamilton Business Improvement Area",
+      location: "Hamilton, ON",
+      period: "July 2019 - August 2022",
+      category: "extracurricular",
+      description: [
+        "Organized seating arrangements for events and engaged with community members attending a non-profit organization.",
+        "Focused on understanding and advocating for the wants and needs within the city through direct communication with community members.",
+        "Bridged understanding between Hamilton citizens and the city administration, striving for better communal relationships.",
+        "Effectively addressed local concerns and contributed to community improvement initiatives."
+      ],
+      skills: ["Event Planning", "Community Engagement", "Advocacy", "Communication"],
+    },
+    {
+      id: 6,
+      title: "Community Volunteer",
+      company: "Hindu Samaj Temple",
+      location: "Hamilton, ON",
+      period: "August 2020 - February 2023",
+      category: "extracurricular",
+      description: [
+        "Instrumental in bridging the gap between tradition and the new generation through dynamic youth engagement events.",
+        "Created meaningful experiences that resonated with young attendees, fostering a sense of community and belonging.",
+        "Planned and executed events that encouraged active participation from youth members.",
+        "Nurtured a vibrant, inclusive environment that celebrated cultural and spiritual values."
+      ],
+      skills: ["Youth Engagement", "Event Planning", "Cultural Programming", "Community Building"],
+    },
+    {
+      id: 7,
       title: "Director of Corporate Relations",
       company: "The GoldenHack",
       location: "Waterloo, ON",
@@ -78,7 +123,7 @@ const ExperienceSection: React.FC = () => {
       link: "https://thegoldenhack.ca"
     },
     {
-      id: 5,
+      id: 8,
       title: "Director of Outreach",
       company: "Virtual Reality Laurier",
       location: "Waterloo, ON",
@@ -183,7 +228,7 @@ const ExperienceSection: React.FC = () => {
                     <div className="flex items-center gap-3 mb-2">
                       <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-netflix-red to-red-700 flex items-center justify-center shadow-lg">
                         {exp.category === 'extracurricular' ? (
-                          <Users className="text-white\" size={24} />
+                          <Users className="text-white" size={24} />
                         ) : (
                           <Briefcase className="text-white" size={24} />
                         )}
