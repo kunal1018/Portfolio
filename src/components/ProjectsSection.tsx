@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, ThumbsUp, Github, Play, Info } from 'lucide-react';
+import { Plus, ThumbsUp, Github, Play, Info, Filter, Search } from 'lucide-react';
 import ProjectDetailModal from './ProjectDetailModal';
 
 interface Project {
@@ -11,15 +11,16 @@ interface Project {
   longDescription: string;
   features: string[];
   match: number;
+  category: string;
   customBackground?: boolean;
   demoUrl?: string;
   githubUrl?: string;
 }
 
 const ProjectsSection: React.FC = () => {
-  const [expandedProject, setExpandedProject] = useState<number | null>(null);
-  const [hoveredProject, setHoveredProject] = useState<number | null>(null);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
   const projects: Project[] = [
     {
@@ -37,6 +38,7 @@ const ProjectsSection: React.FC = () => {
       techStack: ['Python', 'Flask', 'React.js', 'Supabase', 'OpenAI GPT', 'AWS', 'CI/CD'],
       image: 'https://images.pexels.com/photos/7567473/pexels-photo-7567473.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       match: 99,
+      category: 'Full Stack',
       demoUrl: '#',
       githubUrl: '#'
     },
@@ -52,7 +54,8 @@ const ProjectsSection: React.FC = () => {
       ],
       techStack: ['Python', 'Power BI', 'Matplotlib', 'Pandas'],
       image: 'https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      match: 95
+      match: 95,
+      category: 'Data Analysis'
     },
     {
       title: 'Customer Churn Analysis',
@@ -66,9 +69,22 @@ const ProjectsSection: React.FC = () => {
       ],
       techStack: ['Python', 'Scikit-Learn', 'Seaborn', 'NumPy'],
       image: 'https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      match: 92
+      match: 92,
+      category: 'Machine Learning'
     }
   ];
+
+  const categories = ['all', ...new Set(projects.map(project => project.category))];
+
+  const filteredProjects = projects.filter(project => {
+    const matchesSearch = project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         project.techStack.some(tech => tech.toLowerCase().includes(searchQuery.toLowerCase()));
+    
+    const matchesCategory = selectedCategory === 'all' || project.category === selectedCategory;
+    
+    return matchesSearch && matchesCategory;
+  });
 
   return (
     <div className="section-container bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-netflix-red/20 via-black to-black">
@@ -82,163 +98,151 @@ const ProjectsSection: React.FC = () => {
             Featured Projects
           </h1>
         </motion.div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2 }}
-              className="group relative h-full"
-              onMouseEnter={() => setHoveredProject(index)}
-              onMouseLeave={() => setHoveredProject(null)}
-            >
-              <motion.div 
-                className={`relative rounded-xl overflow-hidden transition-all duration-500 ${
-                  hoveredProject === index ? 'scale-[1.02] shadow-2xl shadow-netflix-red/20' : ''
-                }`}
-                style={{ 
-                  transformOrigin: 'center center',
-                  willChange: 'transform'
-                }}
-              >
-                {/* Project Image with Aspect Ratio Container */}
-                <div className="relative aspect-[16/9]">
-                  <img 
-                    src={project.image} 
-                    alt={project.title}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 scale-[1.01]"
-                    style={{ 
-                      willChange: 'transform',
-                      transform: hoveredProject === index ? 'scale(1.1)' : 'scale(1)'
-                    }}
-                  />
-                  <div 
-                    className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-100 transition-opacity duration-300"
-                    style={{
-                      background: hoveredProject === index 
-                        ? 'linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.7), rgba(0,0,0,0.4))'
-                        : 'linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.5), transparent)'
-                    }}
-                  />
-                </div>
 
-                {/* Content Overlay */}
+        {/* Search and Filter Section */}
+        <div className="mb-8 flex flex-col md:flex-row gap-4 items-center justify-between">
+          <div className="relative w-full md:w-96">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+            <input
+              type="text"
+              placeholder="Search projects..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-10 pr-4 py-2 bg-zinc-900/50 border border-zinc-800 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-netflix-red transition-colors"
+            />
+          </div>
+
+          <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-netflix">
+            {categories.map((category) => (
+              <motion.button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                className={`px-4 py-2 rounded-lg whitespace-nowrap transition-colors ${
+                  selectedCategory === category
+                    ? 'bg-netflix-red text-white'
+                    : 'bg-zinc-900/50 text-gray-300 hover:bg-zinc-800'
+                }`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {category.charAt(0).toUpperCase() + category.slice(1)}
+              </motion.button>
+            ))}
+          </div>
+        </div>
+
+        {/* Projects Grid */}
+        <motion.div
+          layout
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.map((project) => (
+              <motion.div
+                key={project.title}
+                layout
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.3 }}
+                className="group relative aspect-[16/9] rounded-xl overflow-hidden"
+              >
+                {/* Project Image */}
+                <img 
+                  src={project.image}
+                  alt={project.title}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent opacity-100 transition-opacity duration-300" />
+
+                {/* Content */}
                 <div className="absolute inset-0 p-6 flex flex-col justify-end">
-                  <div className="space-y-4">
+                  <div className="space-y-3">
                     {/* Match Score */}
-                    <motion.div 
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="flex items-center gap-2 text-green-500"
-                    >
+                    <div className="flex items-center gap-2 text-green-500">
                       <ThumbsUp size={16} className="drop-shadow" />
                       <span className="font-semibold text-sm">{project.match}% Match</span>
-                    </motion.div>
+                    </div>
 
                     {/* Title */}
-                    <motion.h2 
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="text-xl md:text-2xl font-bold text-white group-hover:text-netflix-red transition-colors duration-300"
-                    >
+                    <h2 className="text-xl font-bold text-white group-hover:text-netflix-red transition-colors">
                       {project.title}
-                    </motion.h2>
+                    </h2>
 
-                    {/* Description */}
-                    <motion.p 
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ 
-                        opacity: hoveredProject === index ? 1 : 0,
-                        y: hoveredProject === index ? 0 : 10
-                      }}
-                      transition={{ duration: 0.3 }}
-                      className="text-sm md:text-base text-gray-300 line-clamp-3"
-                    >
-                      {project.description}
-                    </motion.p>
+                    {/* Category Badge */}
+                    <span className="inline-block px-3 py-1 rounded-full text-sm bg-netflix-red/20 text-netflix-red border border-netflix-red/20">
+                      {project.category}
+                    </span>
 
                     {/* Tech Stack */}
-                    <motion.div 
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ 
-                        opacity: hoveredProject === index ? 1 : 0,
-                        y: hoveredProject === index ? 0 : 10
-                      }}
-                      transition={{ duration: 0.3, delay: 0.1 }}
-                      className="flex flex-wrap gap-2"
-                    >
-                      {project.techStack.map((tech, i) => (
+                    <div className="flex flex-wrap gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      {project.techStack.slice(0, 3).map((tech, i) => (
                         <span 
                           key={i}
-                          className="text-xs px-2 py-1 rounded-full bg-netflix-red/20 text-netflix-red border border-netflix-red/20"
+                          className="text-xs px-2 py-1 rounded-full bg-white/10 text-gray-300"
                         >
                           {tech}
                         </span>
                       ))}
-                    </motion.div>
+                      {project.techStack.length > 3 && (
+                        <span className="text-xs px-2 py-1 rounded-full bg-white/10 text-gray-300">
+                          +{project.techStack.length - 3} more
+                        </span>
+                      )}
+                    </div>
 
                     {/* Action Buttons */}
-                    <motion.div 
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ 
-                        opacity: hoveredProject === index ? 1 : 0,
-                        y: hoveredProject === index ? 0 : 10
-                      }}
-                      transition={{ duration: 0.3, delay: 0.2 }}
-                      className="flex gap-3 pt-2"
-                    >
+                    <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 mt-4">
+                      <motion.button
+                        onClick={() => setSelectedProject(project)}
+                        className="flex items-center gap-2 bg-netflix-red hover:bg-red-700 text-white px-4 py-2 rounded-md transition-colors"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <Info size={16} />
+                        Details
+                      </motion.button>
+
                       {project.demoUrl && (
                         <motion.a
                           href={project.demoUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 bg-netflix-red hover:bg-red-700 text-white px-4 py-2 rounded-md transition-colors duration-300"
+                          className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-md transition-colors"
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
                         >
                           <Play size={16} />
-                          <span className="text-sm font-medium">Demo</span>
+                          Demo
                         </motion.a>
                       )}
-                      
-                      {project.githubUrl && (
-                        <motion.a
-                          href={project.githubUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-md transition-colors duration-300"
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                        >
-                          <Github size={16} />
-                          <span className="text-sm font-medium">Code</span>
-                        </motion.a>
-                      )}
-
-                      <motion.button
-                        onClick={() => setSelectedProject(project)}
-                        className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-md transition-colors duration-300"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <Info size={16} />
-                        <span className="text-sm font-medium">Details</span>
-                      </motion.button>
-                    </motion.div>
+                    </div>
                   </div>
                 </div>
               </motion.div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
 
-      <ProjectDetailModal 
-        project={selectedProject} 
-        onClose={() => setSelectedProject(null)} 
-      />
+        {/* No Results Message */}
+        {filteredProjects.length === 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center py-12 text-gray-400"
+          >
+            No projects found matching your criteria.
+          </motion.div>
+        )}
+
+        {/* Project Detail Modal */}
+        <ProjectDetailModal 
+          project={selectedProject} 
+          onClose={() => setSelectedProject(null)} 
+        />
+      </div>
     </div>
   );
 };
