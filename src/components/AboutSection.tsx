@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
-import { Calendar, MapPin, Award, Github, Linkedin, ExternalLink } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
+import { Calendar, MapPin, Award, Github, Linkedin, ExternalLink } from 'lucide-react';
 
 interface SkillCardProps {
   name: string;
@@ -190,8 +190,8 @@ const AboutSection: React.FC = () => {
               >
                 <a 
                   href="/resume.pdf"
-                  className="inline-flex items-center gap-2 bg-white text-black px-8 py-3 rounded-lg hover:bg-gray-200 transition-colors hover:scale-105 transform duration-200 shadow-md"
                   download
+                  className="inline-flex items-center gap-2 bg-white text-black px-8 py-3 rounded-lg hover:bg-gray-200 transition-colors hover:scale-105 transform duration-200 shadow-md"
                 >
                   <ExternalLink size={20} />
                   Download Resume
@@ -239,6 +239,45 @@ const AboutSection: React.FC = () => {
               ))}
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* GitHub Stats Section */}
+      <div className="container mx-auto px-4 py-20">
+        <motion.h2 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-3xl font-bold mb-12"
+        >
+          GitHub Contributions
+        </motion.h2>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="bg-zinc-900/50 p-6 rounded-lg backdrop-blur-sm border border-zinc-800/50"
+          >
+            <img
+              src="https://github-readme-stats.vercel.app/api?username=kunal1018&show_icons=true&theme=dark&hide_border=true&count_private=true&bg_color=00000000"
+              alt="GitHub Stats"
+              className="w-full"
+            />
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="bg-zinc-900/50 p-6 rounded-lg backdrop-blur-sm border border-zinc-800/50"
+          >
+            <img
+              src="https://github-readme-streak-stats.herokuapp.com/?user=kunal1018&theme=dark&hide_border=true&background=00000000"
+              alt="GitHub Streak Stats"
+              className="w-full"
+            />
+          </motion.div>
         </div>
       </div>
     </div>
