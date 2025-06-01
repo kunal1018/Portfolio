@@ -202,6 +202,26 @@ const AboutSection: React.FC = () => {
         </div>
       </div>
 
+      {/* Bio Section */}
+      <div className="container mx-auto px-4 py-20">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="max-w-4xl mx-auto text-lg text-gray-300 space-y-6"
+        >
+          <p>
+            Hi, I'm Kunal!
+            I'm a 3rd-year Honours Computer Science student at Wilfrid Laurier University with a passion for turning ideas into real, impactful solutions. I love building projects that sit at the intersection of technology, business, and user experience — whether that's through software development, data-driven tools, or thoughtful design.
+          </p>
+          <p>
+            I'm constantly exploring new ways to learn, grow, and collaborate with others. From personal finance apps to community tech initiatives, I enjoy working on projects that are both practical and innovative.
+          </p>
+          <p>
+            Let's connect — I'm always open to new ideas, opportunities, and conversations.
+          </p>
+        </motion.div>
+      </div>
+
       {/* Skills Section */}
       <div className="container mx-auto px-4 py-20">
         <motion.h2 
