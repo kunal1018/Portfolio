@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, ThumbsUp, Github, Play, Info } from 'lucide-react';
+import ProjectDetailModal from './ProjectDetailModal';
 
 interface Project {
   title: string;
@@ -18,6 +19,7 @@ interface Project {
 const ProjectsSection: React.FC = () => {
   const [expandedProject, setExpandedProject] = useState<number | null>(null);
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const projects: Project[] = [
     {
@@ -214,6 +216,16 @@ const ProjectsSection: React.FC = () => {
                           <span className="text-sm font-medium">Code</span>
                         </motion.a>
                       )}
+
+                      <motion.button
+                        onClick={() => setSelectedProject(project)}
+                        className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-md transition-colors duration-300"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <Info size={16} />
+                        <span className="text-sm font-medium">Details</span>
+                      </motion.button>
                     </motion.div>
                   </div>
                 </div>
@@ -222,6 +234,11 @@ const ProjectsSection: React.FC = () => {
           ))}
         </div>
       </div>
+
+      <ProjectDetailModal 
+        project={selectedProject} 
+        onClose={() => setSelectedProject(null)} 
+      />
     </div>
   );
 };
