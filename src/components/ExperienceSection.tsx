@@ -1,70 +1,73 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, ThumbsUp, Github, Play, Info } from 'lucide-react';
+import { Calendar, MapPin, ExternalLink, Building2, ArrowRight, GraduationCap, Briefcase } from 'lucide-react';
 
-interface Project {
+interface Experience {
+  id: number;
   title: string;
+  company: string;
+  location: string;
+  period: string;
+  type: string;
   description: string;
-  techStack: string[];
-  image: string;
-  longDescription: string;
-  features: string[];
-  match: number;
-  customBackground?: boolean;
-  demoUrl?: string;
-  githubUrl?: string;
+  responsibilities: string[];
+  skills: string[];
+  link?: string;
 }
 
-const ProjectsSection: React.FC = () => {
-  const [expandedProject, setExpandedProject] = useState<number | null>(null);
+const ExperienceSection: React.FC = () => {
+  const [selectedExperience, setSelectedExperience] = useState<number | null>(null);
 
-  const projects: Project[] = [
+  const experiences: Experience[] = [
     {
-      title: 'Keeper — AI-Powered Finance Tracker',
-      description: 'Building an AI-powered personal finance platform helping users track expenses, categorize spending, and gain real-time insights to improve financial literacy.',
-      longDescription: 'Keeper is a cutting-edge personal finance platform that leverages artificial intelligence to help users better understand and manage their finances. The platform combines advanced AI capabilities with intuitive design to deliver personalized financial insights and recommendations.',
-      features: [
-        'Developing backend with Python, Flask, and Supabase for secure data storage and authentication',
-        'Designing intuitive frontend using React.js for seamless user experience',
-        'Integrating OpenAI\'s GPT models for personalized financial insights',
-        'Implementing AI/ML for automated expense classification',
-        'Architecting for scalability using Supabase and AWS infrastructure',
-        'Building CI/CD pipelines for continuous delivery'
+      id: 1,
+      title: "Software Developer Co-op",
+      company: "TD Bank",
+      location: "Toronto, ON",
+      period: "May 2024 - Aug 2024",
+      type: "Upcoming Internship",
+      description: "Joining TD's Technology Solutions team to work on full-stack development projects.",
+      responsibilities: [
+        "Will be working on developing and maintaining enterprise-level applications",
+        "Collaborating with cross-functional teams on financial technology solutions",
+        "Contributing to the bank's digital transformation initiatives"
       ],
-      techStack: ['Python', 'Flask', 'React.js', 'Supabase', 'OpenAI GPT', 'AWS', 'CI/CD'],
-      image: 'https://images.pexels.com/photos/7567473/pexels-photo-7567473.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      match: 99,
-      customBackground: true,
-      demoUrl: '#',
-      githubUrl: '#'
+      skills: ["Java", "Spring Boot", "React", "TypeScript", "AWS"],
+      link: "https://www.td.com"
     },
     {
-      title: 'Sales Data Analysis Dashboard',
-      description: 'Analyzed a retail company\'s sales dataset to identify trends in revenue, product performance, and customer behavior.',
-      longDescription: 'An interactive dashboard that transforms complex sales data into actionable insights. Features include real-time sales tracking, customer segmentation analysis, and predictive analytics for future sales trends.',
-      features: [
-        'Real-time sales monitoring',
-        'Customer behavior analysis',
-        'Product performance metrics',
-        'Predictive sales forecasting'
+      id: 2,
+      title: "Teaching Assistant",
+      company: "Wilfrid Laurier University",
+      location: "Waterloo, ON",
+      period: "Jan 2024 - Present",
+      type: "Part-time",
+      description: "Teaching Assistant for CP164: Data Structures I, supporting students in learning fundamental programming concepts.",
+      responsibilities: [
+        "Conducting weekly lab sessions and tutorial classes",
+        "Assisting students with programming assignments and projects",
+        "Grading assignments and providing constructive feedback",
+        "Holding office hours for one-on-one student support"
       ],
-      techStack: ['Python', 'Power BI', 'Matplotlib', 'Pandas'],
-      image: 'https://images.pexels.com/photos/7567473/pexels-photo-7567473.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      match: 95
+      skills: ["Python", "Data Structures", "Algorithms", "Teaching", "Mentoring"],
+      link: "https://www.wlu.ca"
     },
     {
-      title: 'Customer Churn Analysis',
-      description: 'Analyzed customer data to identify factors contributing to churn for a subscription-based service.',
-      longDescription: 'A machine learning-powered system that predicts customer churn risk and provides recommendations for retention strategies. The platform analyzes customer interaction patterns, service usage, and feedback to identify at-risk customers.',
-      features: [
-        'Churn prediction modeling',
-        'Customer sentiment analysis',
-        'Automated risk alerts',
-        'Retention strategy recommendations'
+      id: 3,
+      title: "Web Development Lead",
+      company: "Laurier Computing Society",
+      location: "Waterloo, ON",
+      period: "Sep 2023 - Present",
+      type: "Volunteer",
+      description: "Leading web development initiatives for the Laurier Computing Society, enhancing the organization's online presence.",
+      responsibilities: [
+        "Managing the development of the society's website",
+        "Organizing web development workshops for members",
+        "Collaborating with the design team on UI/UX improvements",
+        "Mentoring junior developers in the society"
       ],
-      techStack: ['Python', 'Scikit-Learn', 'Seaborn', 'NumPy'],
-      image: 'https://images.pexels.com/photos/7567558/pexels-photo-7567558.jpeg?auto=compress&cs=tintsrgb&w=1260&h=750&dpr=1',
-      match: 92
+      skills: ["React", "Next.js", "Tailwind CSS", "TypeScript", "Git"],
+      link: "https://www.wlu.ca"
     }
   ];
 
@@ -78,199 +81,146 @@ const ProjectsSection: React.FC = () => {
     }
   };
 
-  const cardVariants = {
+  const itemVariants = {
     hidden: { 
       opacity: 0,
-      y: 20,
-      scale: 0.95
+      y: 20
     },
     visible: {
       opacity: 1,
       y: 0,
-      scale: 1,
       transition: {
-        type: "spring",
-        stiffness: 300,
-        damping: 30
-      }
-    },
-    hover: {
-      scale: 1.05,
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 10
+        duration: 0.6,
+        ease: [0.22, 1, 0.36, 1]
       }
     }
   };
 
   return (
-    <div className="min-h-screen pt-20 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-netflix-red/20 via-black to-black">
-      <div className="container mx-auto px-4 py-12 h-[calc(100vh-5rem)] flex flex-col">
+    <div className="section-container bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-netflix-red/20 via-black to-black">
+      <div className="container mx-auto px-4 py-12">
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="flex flex-col items-center mb-12"
+          className="text-center mb-16"
         >
-          <h1 className="text-5xl font-bold mb-8 font-netflix gradient-text">Featured Projects</h1>
+          <h1 className="text-4xl md:text-6xl font-bold font-netflix bg-clip-text text-transparent bg-gradient-to-r from-netflix-red via-red-500 to-netflix-red animate-gradient">
+            Professional Experience
+          </h1>
         </motion.div>
-        
-        <motion.div 
+
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="flex-1 overflow-y-auto pr-4 -mr-4 scrollbar-thin scrollbar-thumb-red-600 scrollbar-track-zinc-800/30"
+          className="grid grid-cols-1 gap-6"
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
-              <motion.div
-                key={index}
-                variants={cardVariants}
-                whileHover="hover"
-                className={`relative group perspective ${
-                  expandedProject === index ? 'lg:col-span-2 lg:row-span-2' : ''
-                }`}
-                onMouseEnter={() => setExpandedProject(index)}
-                onMouseLeave={() => setExpandedProject(null)}
-              >
-                <motion.div 
-                  className="relative h-full rounded-xl overflow-hidden shadow-2xl transition-all duration-300 transform-gpu bg-zinc-900/50 backdrop-blur-sm border border-white/5"
-                  style={{
-                    transformStyle: 'preserve-3d',
-                  }}
-                >
-                  {!project.customBackground && (
-                    <div 
-                      className="aspect-video bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                      style={{ backgroundImage: `url(${project.image})` }}
-                    />
+          {experiences.map((exp) => (
+            <motion.div
+              key={exp.id}
+              variants={itemVariants}
+              className={`group relative rounded-xl overflow-hidden transition-all duration-300 ${
+                selectedExperience === exp.id ? 'bg-zinc-900/90' : 'bg-zinc-900/50'
+              } backdrop-blur-sm hover:bg-zinc-900/90 border border-white/5`}
+              onClick={() => setSelectedExperience(selectedExperience === exp.id ? null : exp.id)}
+            >
+              <div className="p-6 md:p-8">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-netflix-red to-red-700 flex items-center justify-center shadow-lg">
+                        {exp.type.toLowerCase().includes('internship') ? (
+                          <GraduationCap className="text-white" size={24} />
+                        ) : (
+                          <Briefcase className="text-white" size={24} />
+                        )}
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-bold text-white group-hover:text-netflix-red transition-colors">
+                          {exp.title}
+                        </h3>
+                        <p className="text-gray-400">{exp.company}</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex flex-wrap gap-4 text-sm text-gray-400 mt-4">
+                      <div className="flex items-center gap-2">
+                        <Calendar size={16} className="text-netflix-red" />
+                        <span>{exp.period}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <MapPin size={16} className="text-netflix-red" />
+                        <span>{exp.location}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Building2 size={16} className="text-netflix-red" />
+                        <span>{exp.type}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <motion.button
+                    className="text-netflix-red"
+                    animate={{ rotate: selectedExperience === exp.id ? 90 : 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <ArrowRight size={24} />
+                  </motion.button>
+                </div>
+
+                <AnimatePresence>
+                  {selectedExperience === exp.id && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="mt-6 space-y-4 overflow-hidden"
+                    >
+                      <p className="text-gray-300">{exp.description}</p>
+
+                      <div className="space-y-2">
+                        <h4 className="text-white font-semibold">Key Responsibilities:</h4>
+                        <ul className="list-disc list-inside space-y-1 text-gray-300">
+                          {exp.responsibilities.map((resp, index) => (
+                            <li key={index}>{resp}</li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div className="flex flex-wrap gap-2">
+                        {exp.skills.map((skill, index) => (
+                          <span
+                            key={index}
+                            className="px-3 py-1 rounded-full text-sm bg-netflix-red/20 text-netflix-red border border-netflix-red/20"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+
+                      {exp.link && (
+                        <motion.a
+                          href={exp.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 text-netflix-red hover:text-red-400 transition-colors mt-4"
+                          whileHover={{ x: 5 }}
+                        >
+                          <span>Visit Website</span>
+                          <ExternalLink size={16} />
+                        </motion.a>
+                      )}
+                    </motion.div>
                   )}
-                  
-                  {/* Content overlay */}
-                  <AnimatePresence>
-                    {expandedProject === index ? (
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="absolute inset-0 p-6 flex flex-col bg-gradient-to-t from-black via-black/90 to-black/70"
-                      >
-                        <div className="space-y-4">
-                          <div className="flex items-start justify-between">
-                            <motion.h2 
-                              initial={{ opacity: 0, y: 20 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              className="text-2xl font-bold text-white"
-                            >
-                              {project.title}
-                            </motion.h2>
-                            <motion.span 
-                              initial={{ opacity: 0, scale: 0.8 }}
-                              animate={{ opacity: 1, scale: 1 }}
-                              className="text-green-500 font-semibold flex items-center gap-2"
-                            >
-                              <ThumbsUp size={16} />
-                              {project.match}% Match
-                            </motion.span>
-                          </div>
-                          
-                          <motion.p 
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            className="text-gray-300"
-                          >
-                            {project.longDescription}
-                          </motion.p>
-                          
-                          <motion.div 
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            className="flex flex-wrap gap-2"
-                          >
-                            {project.techStack.map((tech, i) => (
-                              <span 
-                                key={i} 
-                                className="text-sm px-3 py-1 rounded-full bg-red-600/20 text-red-400 border border-red-500/20"
-                              >
-                                {tech}
-                              </span>
-                            ))}
-                          </motion.div>
-
-                          <motion.div 
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            className="space-y-2"
-                          >
-                            {project.features.map((feature, i) => (
-                              <div key={i} className="flex items-center gap-2 text-gray-300">
-                                <Plus size={16} className="text-red-500" />
-                                <span>{feature}</span>
-                              </div>
-                            ))}
-                          </motion.div>
-                        </div>
-
-                        <div className="mt-auto pt-6 flex items-center gap-4">
-                          {project.demoUrl && (
-                            <motion.a
-                              href={project.demoUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-colors"
-                              whileHover={{ scale: 1.05 }}
-                              whileTap={{ scale: 0.95 }}
-                            >
-                              <Play size={16} />
-                              Live Demo
-                            </motion.a>
-                          )}
-                          
-                          {project.githubUrl && (
-                            <motion.a
-                              href={project.githubUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="flex items-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-white px-4 py-2 rounded-lg transition-colors"
-                              whileHover={{ scale: 1.05 }}
-                              whileTap={{ scale: 0.95 }}
-                            >
-                              <Github size={16} />
-                              View Code
-                            </motion.a>
-                          )}
-                          
-                          <motion.button
-                            className="ml-auto text-gray-400 hover:text-red-500 transition-colors"
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                          >
-                            <Info size={20} />
-                          </motion.button>
-                        </div>
-                      </motion.div>
-                    ) : (
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent p-6 flex flex-col justify-end"
-                      >
-                        <h2 className="text-xl font-bold text-white group-hover:text-red-500 transition-colors">
-                          {project.title}
-                        </h2>
-                        <p className="text-gray-400 mt-2 line-clamp-2">{project.description}</p>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              </motion.div>
-            ))}
-          </div>
+                </AnimatePresence>
+              </div>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </div>
   );
 };
 
-export default ProjectsSection;
+export default ExperienceSection;
