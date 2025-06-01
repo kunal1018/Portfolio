@@ -5,8 +5,8 @@ const NetflixIntro = () => {
   const [stage, setStage] = useState<'initial' | 'fullName' | 'k'>('initial');
 
   useEffect(() => {
-    const timer1 = setTimeout(() => setStage('fullName'), 500);
-    const timer2 = setTimeout(() => setStage('k'), 3000);
+    const timer1 = setTimeout(() => setStage('fullName'), 300);
+    const timer2 = setTimeout(() => setStage('k'), 2500);
 
     return () => {
       clearTimeout(timer1);
@@ -25,7 +25,7 @@ const NetflixIntro = () => {
           scale: stage === 'k' ? 0.8 : 1
         }}
         transition={{ 
-          duration: 0.8,
+          duration: 0.6,
           ease: [0.22, 1, 0.36, 1]
         }}
       >
@@ -51,7 +51,7 @@ const NetflixIntro = () => {
               opacity: 1
             }}
             transition={{ 
-              duration: 0.8,
+              duration: 0.6,
               ease: [0.22, 1, 0.36, 1]
             }}
             className="inline-block overflow-hidden whitespace-nowrap"

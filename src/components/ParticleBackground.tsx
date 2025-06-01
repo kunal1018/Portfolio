@@ -24,7 +24,7 @@ const ParticleBackground = () => {
             value: "transparent",
           },
         },
-        fpsLimit: 120,
+        fpsLimit: 60,
         interactivity: {
           events: {
             onHover: {
@@ -48,7 +48,7 @@ const ParticleBackground = () => {
             color: "#E50914",
             distance: 150,
             enable: true,
-            opacity: 0.2,
+            opacity: 0.1,
             width: 1,
           },
           move: {
@@ -58,24 +58,24 @@ const ParticleBackground = () => {
               default: "bounce",
             },
             random: false,
-            speed: 1,
+            speed: 0.5,
             straight: false,
           },
           number: {
             density: {
               enable: true,
-              area: 800,
+              area: 1000,
             },
-            value: 80,
+            value: 40,
           },
           opacity: {
-            value: 0.2,
+            value: 0.1,
           },
           shape: {
             type: "circle",
           },
           size: {
-            value: { min: 1, max: 3 },
+            value: { min: 1, max: 2 },
           },
         },
         detectRetina: true,

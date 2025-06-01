@@ -95,7 +95,7 @@ const Contact: React.FC = () => {
         return (
           <div className="space-y-4">
             <p className="text-gray-300">
-              I'm actively seeking internship and co-op roles in software development. With a strong foundation in full-stack development and a passion for creating impactful solutions, I'm excited to bring my skills to a dynamic team.
+              I'm actively seeking internship and co-op roles in software development. With a strong foundation in full-stack development and a passion for creating impactful solutions, I\'m excited to bring my skills to a dynamic team.
             </p>
             <div className="flex gap-4">
               <a 

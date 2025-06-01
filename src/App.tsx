@@ -20,7 +20,7 @@ function App() {
     const introTimer = setTimeout(() => {
       setShowIntro(false);
       setShowProfiles(true);
-    }, 4500);
+    }, 3500);
 
     return () => clearTimeout(introTimer);
   }, []);
@@ -30,13 +30,15 @@ function App() {
     setTimeout(() => {
       setSelectedSection(section);
       setShowContent(true);
-    }, 500);
+    }, 300);
   };
 
   const handleBackToProfiles = () => {
     setShowContent(false);
     setSelectedSection(null);
-    setShowProfiles(true);
+    setTimeout(() => {
+      setShowProfiles(true);
+    }, 300);
   };
 
   const pageTransition = {
