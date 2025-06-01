@@ -38,6 +38,21 @@ const EducationSection: React.FC = () => {
       credentialId: 'fcc2e85812d-6c70-46fc-825a-8b1195a87fa9-rwd',
       link: 'https://www.freecodecamp.org/certification/fcc2e85812d-6c70-46fc-825a-8b1195a87fa9/responsive-web-design',
       logo: 'freeCodeCamp'
+    },
+    {
+      title: 'KPMG Audit & Assurance Job Simulation',
+      issuer: 'KPMG in Canada',
+      issuedDate: 'April 2024',
+      credentialId: 'ptYoX2NYoggh8236W',
+      link: 'https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/KPMG%20in%20Canada/bNotYLkg7a9SK42vB_KPMG%20in%20Canada_Qr4GaG6gujGTYyGta_1713666524381_completion_certificate.pdf',
+      logo: 'KPMG'
+    },
+    {
+      title: 'Leadership Certificate',
+      issuer: 'Wilfrid Laurier University',
+      issuedDate: 'May 2024',
+      skills: ['Leadership', 'Team Leadership'],
+      logo: 'WLU'
     }
   ];
 
@@ -169,15 +184,12 @@ const EducationSection: React.FC = () => {
             <motion.div variants={itemVariants}>
               <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3 font-netflix">
                 <Award className="text-netflix-red" size={24} />
-                Certifications
+                Certifications & Achievements
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {certifications.map((cert, index) => (
-                  <motion.a
+                  <motion.div
                     key={index}
-                    href={cert.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
                     variants={itemVariants}
                     className="bg-zinc-900/50 backdrop-blur-xl rounded-xl p-6 border border-netflix-red/10 hover:border-netflix-red/30 transition-all duration-300 group shadow-lg shadow-netflix-red/5"
                     whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
@@ -191,19 +203,42 @@ const EducationSection: React.FC = () => {
                           <h3 className="text-lg font-semibold text-white group-hover:text-netflix-red transition-colors">
                             {cert.title}
                           </h3>
-                          <ExternalLink size={16} className="text-netflix-red mt-1" />
+                          {cert.link && (
+                            <a
+                              href={cert.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-netflix-red hover:text-red-400 transition-colors"
+                            >
+                              <ExternalLink size={16} />
+                            </a>
+                          )}
                         </div>
                         <p className="text-gray-400 text-sm mt-1">{cert.issuer}</p>
                         <div className="flex items-center gap-2 mt-2 text-sm text-gray-500">
                           <Calendar size={14} />
                           <span>{cert.issuedDate}</span>
                         </div>
-                        <p className="text-xs text-gray-500 mt-2">
-                          Credential ID: {cert.credentialId}
-                        </p>
+                        {cert.credentialId && (
+                          <p className="text-xs text-gray-500 mt-2">
+                            Credential ID: {cert.credentialId}
+                          </p>
+                        )}
+                        {cert.skills && (
+                          <div className="flex flex-wrap gap-2 mt-3">
+                            {cert.skills.map((skill, i) => (
+                              <span
+                                key={i}
+                                className="text-xs px-2 py-1 rounded-full bg-netflix-red/20 text-netflix-red border border-netflix-red/20"
+                              >
+                                {skill}
+                              </span>
+                            ))}
+                          </div>
+                        )}
                       </div>
                     </div>
-                  </motion.a>
+                  </motion.div>
                 ))}
               </div>
             </motion.div>
