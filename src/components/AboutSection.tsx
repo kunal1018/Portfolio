@@ -247,10 +247,17 @@ const AboutSection: React.FC = () => {
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-3xl font-bold mb-12"
+          className="text-3xl font-bold mb-4"
         >
           GitHub Contributions
         </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-gray-400 mb-8 italic"
+        >
+          (I know it's not great, I'm working on it...)
+        </motion.p>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <motion.div
