@@ -183,7 +183,7 @@ const ExperienceSection: React.FC = () => {
                     <div className="flex items-center gap-3 mb-2">
                       <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-netflix-red to-red-700 flex items-center justify-center shadow-lg">
                         {exp.category === 'extracurricular' ? (
-                          <Users className="text-white" size={24} />
+                          <Users className="text-white\" size={24} />
                         ) : (
                           <Briefcase className="text-white" size={24} />
                         )}
