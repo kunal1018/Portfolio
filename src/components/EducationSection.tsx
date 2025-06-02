@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { GraduationCap, Calendar, MapPin, BookOpen, Award, ExternalLink } from 'lucide-react';
+import { GraduationCap, Calendar, MapPin, BookOpen, Award, ExternalLink, Github, Code, FileCode } from 'lucide-react';
 
 const EducationSection: React.FC = () => {
   const education = {
@@ -21,6 +21,41 @@ const EducationSection: React.FC = () => {
       { code: 'CP213', name: 'Object-Oriented Programming' }
     ]
   };
+
+  const academicProjects = [
+    {
+      title: 'Object-Oriented Programming',
+      courseCode: 'CP213',
+      description: 'Comprehensive coursework focusing on Java programming and object-oriented concepts, including inheritance, polymorphism, interfaces, and GUI development with Swing.',
+      instructor: 'Zara Hamid',
+      semester: 'Fall 2024',
+      technologies: ['Java', 'Eclipse IDE', 'Swing', 'JUnit'],
+      topics: [
+        'Classes and Objects',
+        'Inheritance and Polymorphism',
+        'Exception Handling',
+        'File I/O',
+        'GUI Development'
+      ],
+      githubUrl: 'https://github.com/kunal1018/CP213'
+    },
+    {
+      title: 'Data Structures II',
+      courseCode: 'CP264',
+      description: 'Advanced exploration of data structures and algorithms in C, covering complex implementations of trees, graphs, and efficient sorting algorithms.',
+      instructor: 'Bernard Chiu',
+      semester: 'Winter 2025',
+      technologies: ['C', 'GCC', 'Make', 'Valgrind'],
+      topics: [
+        'Advanced Arrays',
+        'Linked Lists',
+        'Trees (BST, AVL)',
+        'Heaps',
+        'Graph Algorithms'
+      ],
+      githubUrl: 'https://github.com/kunal1018/CP264'
+    }
+  ];
 
   const certifications = [
     {
@@ -137,6 +172,93 @@ const EducationSection: React.FC = () => {
                 </div>
                 <p className="text-gray-300">{education.location}</p>
                 <p className="text-gray-400 mt-1">Campus</p>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Academic Projects Section */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="mb-16"
+          >
+            <motion.div variants={itemVariants}>
+              <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3 font-netflix">
+                <Code className="text-netflix-red" size={24} />
+                Academic Projects
+              </h2>
+              <div className="grid grid-cols-1 gap-6">
+                {academicProjects.map((project, index) => (
+                  <motion.div
+                    key={index}
+                    variants={itemVariants}
+                    className="bg-zinc-900/50 backdrop-blur-xl rounded-xl p-6 border border-netflix-red/10 hover:border-netflix-red/30 transition-all duration-300 group"
+                    whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+                  >
+                    <div className="flex flex-col md:flex-row gap-6">
+                      <div className="md:w-1/4">
+                        <div className="flex items-center gap-3 mb-3">
+                          <FileCode className="text-netflix-red" size={24} />
+                          <h3 className="text-xl font-semibold text-white">
+                            {project.courseCode}
+                          </h3>
+                        </div>
+                        <p className="text-gray-400 text-sm">{project.semester}</p>
+                        <p className="text-gray-400 text-sm">Instructor: {project.instructor}</p>
+                      </div>
+                      
+                      <div className="md:w-3/4">
+                        <h3 className="text-xl font-semibold text-white mb-3">
+                          {project.title}
+                        </h3>
+                        <p className="text-gray-300 mb-4">
+                          {project.description}
+                        </p>
+                        
+                        <div className="mb-4">
+                          <h4 className="text-sm font-semibold text-gray-400 mb-2">Key Topics:</h4>
+                          <div className="flex flex-wrap gap-2">
+                            {project.topics.map((topic, i) => (
+                              <span
+                                key={i}
+                                className="text-xs px-2 py-1 rounded-full bg-netflix-red/20 text-netflix-red border border-netflix-red/20"
+                              >
+                                {topic}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                        
+                        <div className="mb-4">
+                          <h4 className="text-sm font-semibold text-gray-400 mb-2">Technologies:</h4>
+                          <div className="flex flex-wrap gap-2">
+                            {project.technologies.map((tech, i) => (
+                              <span
+                                key={i}
+                                className="text-xs px-2 py-1 rounded-full bg-white/10 text-gray-300"
+                              >
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                        
+                        <motion.a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 text-netflix-red hover:text-red-400 transition-colors"
+                          whileHover={{ x: 5 }}
+                        >
+                          <Github size={16} />
+                          <span>View Repository</span>
+                          <ExternalLink size={16} />
+                        </motion.a>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
               </div>
             </motion.div>
           </motion.div>

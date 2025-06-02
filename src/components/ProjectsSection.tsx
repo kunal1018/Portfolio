@@ -43,6 +43,43 @@ const ProjectsSection: React.FC = () => {
       githubUrl: '#'
     },
     {
+      title: 'Be My Valentine - Interactive Experience',
+      description: 'A creative and interactive web application built to ask someone special to be my Valentine, showcasing frontend development skills and attention to user experience.',
+      longDescription: 'An engaging and heartfelt project that demonstrates both technical proficiency and creative design. This interactive web application uses modern web technologies to create a unique and memorable way to ask someone to be your Valentine.',
+      features: [
+        'Interactive "Yes/No" functionality with smooth animations',
+        'Clean and minimal UI design for optimal user experience',
+        'Responsive layout that works across all devices',
+        'Type-safe development with TypeScript integration',
+        'Fast development and performance optimization with Vite'
+      ],
+      techStack: ['React', 'TypeScript', 'Vite', 'ESLint', 'CSS Animations'],
+      image: 'https://images.pexels.com/photos/4041285/pexels-photo-4041285.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      match: 95,
+      category: 'Frontend',
+      demoUrl: 'https://kunal1018.github.io/valentine',
+      githubUrl: 'https://github.com/kunal1018/valentine'
+    },
+    {
+      title: 'Developer Portfolio V1',
+      description: 'My first personal portfolio website showcasing my journey as a Computer Science student, built with modern web technologies and clean design principles.',
+      longDescription: 'A comprehensive portfolio website that serves as a digital resume and project showcase. Built with modern web technologies, it features a clean, responsive design and showcases my skills, projects, and journey as a developer.',
+      features: [
+        'Responsive design optimized for all devices',
+        'Clean and intuitive navigation',
+        'Project showcase with detailed descriptions',
+        'Skills and experience presentation',
+        'Contact form for easy communication',
+        'Integration with GitHub for project updates'
+      ],
+      techStack: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'GitHub Pages'],
+      image: 'https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      match: 92,
+      category: 'Frontend',
+      demoUrl: 'https://kunal1018.github.io',
+      githubUrl: 'https://github.com/kunal1018/portfolio-v1'
+    },
+    {
       title: 'Sales Data Analysis Dashboard',
       description: 'Analyzed a retail company\'s sales dataset to identify trends in revenue, product performance, and customer behavior.',
       longDescription: 'An interactive dashboard that transforms complex sales data into actionable insights. Features include real-time sales tracking, customer segmentation analysis, and predictive analytics for future sales trends.',
@@ -54,23 +91,8 @@ const ProjectsSection: React.FC = () => {
       ],
       techStack: ['Python', 'Power BI', 'Matplotlib', 'Pandas'],
       image: 'https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      match: 95,
+      match: 90,
       category: 'Data Analysis'
-    },
-    {
-      title: 'Customer Churn Analysis',
-      description: 'Analyzed customer data to identify factors contributing to churn for a subscription-based service.',
-      longDescription: 'A machine learning-powered system that predicts customer churn risk and provides recommendations for retention strategies. The platform analyzes customer interaction patterns, service usage, and feedback to identify at-risk customers.',
-      features: [
-        'Churn prediction modeling',
-        'Customer sentiment analysis',
-        'Automated risk alerts',
-        'Retention strategy recommendations'
-      ],
-      techStack: ['Python', 'Scikit-Learn', 'Seaborn', 'NumPy'],
-      image: 'https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      match: 92,
-      category: 'Machine Learning'
     }
   ];
 
