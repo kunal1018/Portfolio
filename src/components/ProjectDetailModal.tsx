@@ -28,8 +28,10 @@ const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project, onClos
       }
     };
 
+    // Add event listener when component mounts
     window.addEventListener('keydown', handleEscapeKey);
 
+    // Cleanup event listener when component unmounts
     return () => {
       window.removeEventListener('keydown', handleEscapeKey);
     };
