@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Play, Github, CheckCircle } from 'lucide-react';
 
@@ -20,6 +20,21 @@ interface ProjectDetailModalProps {
 }
 
 const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project, onClose }) => {
+  // Handle escape key press
+  useEffect(() => {
+    const handleEscapeKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    window.addEventListener('keydown', handleEscapeKey);
+
+    return () => {
+      window.removeEventListener('keydown', handleEscapeKey);
+    };
+  }, [onClose]);
+
   if (!project) {
     return null;
   }
@@ -71,13 +86,15 @@ const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project, onClos
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
-            <button
+            <motion.button
               onClick={onClose}
               className="absolute top-4 right-4 z-10 p-2 rounded-full bg-zinc-800/70 text-white hover:bg-zinc-700/70 transition-colors"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
               aria-label="Close project details"
             >
               <X size={24} />
-            </button>
+            </motion.button>
 
             {/* Project Image/Header */}
             <div className="relative h-64 md:h-96 bg-cover bg-center" style={{ backgroundImage: `url(${project.image})` }}>
@@ -128,26 +145,30 @@ const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project, onClos
               {/* Action Buttons */}
               <motion.div variants={contentVariants} className="flex flex-wrap gap-4 pt-4">
                 {project.demoUrl && (
-                  <a
+                  <motion.a
                     href={project.demoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 bg-netflix-red hover:bg-red-700 text-white px-6 py-3 rounded-lg transition-colors text-lg font-medium"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
                     <Play size={20} />
                     Live Demo
-                  </a>
+                  </motion.a>
                 )}
                 {project.githubUrl && (
-                  <a
+                  <motion.a
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-white px-6 py-3 rounded-lg transition-colors text-lg font-medium"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
                     <Github size={20} />
                     View Code
-                  </a>
+                  </motion.a>
                 )}
               </motion.div>
             </div>
