@@ -90,12 +90,12 @@ const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({ project, onClos
             {/* Close Button */}
             <motion.button
               onClick={onClose}
-              className="absolute top-4 right-4 z-10 p-2 rounded-full bg-zinc-800/70 text-white hover:bg-zinc-700/70 transition-colors"
+              className="absolute top-6 right-6 z-50 p-3 rounded-full bg-black/80 text-white hover:bg-black/60 transition-colors shadow-lg"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               aria-label="Close project details"
             >
-              <X size={24} />
+              <X size={28} className="drop-shadow-lg" />
             </motion.button>
 
             {/* Project Image/Header */}
